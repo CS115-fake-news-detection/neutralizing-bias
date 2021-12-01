@@ -59,6 +59,16 @@ Checkpoints, tensorboard summaries, and per-epoch evaluations and decodings will
 
 
 ### Inference
+Benjamin's fixed command to run inference:
+```
+python joint/inference.py --test $DATA/biased.word.test \
+       --bert_full_embeddings --bert_encoder --debias_weight 1.3 \
+       --pointer_generator --coverage --no_tok_enrich \
+       --working_dir inference_concurrent/ \
+       --inference_output inference_concurrent/output.txt \
+       --debias_checkpoint model.ckpt
+```
+Shell doesn't like the comment or its preceding backslash as in the original command below. Also changes `--debias_checkpoint`.
 
 ```
 python joint/inference.py \
@@ -94,6 +104,21 @@ Checkpoints, tensorboard summaries, and per-epoch evaluations and decodings will
 
 
 ### Inference
+
+Benjamin's updated command:
+
+```
+python joint/inference.py \
+       --test $DATA/biased.word.test \
+       --categories_file $DATA/revision_topics.csv --category_input \
+       --extra_features_top --pre_enrich --activation_hidden --tagging_pretrain_epochs 3 \
+       --bert_full_embeddings --debias_weight 1.3 --token_softmax \
+       --pointer_generator --coverage \
+       --working_dir inference_modular/ \
+       --inference_output inference_modular/inference_output.txt \
+       --checkpoint model.ckpt
+```
+Changes `--checkpoint` to current model location.
 
 ```
 python joint/inference.py \
